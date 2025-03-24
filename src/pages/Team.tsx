@@ -34,42 +34,64 @@ interface StaffMember {
 
 const TeamButtons = ({ activeTeam, activeTab, setActiveTeam, setActiveTab }) => {
   return (
-    <>
-      {/* Основные кнопки выбора команды */}
-      <div className="flex justify-center gap-4 mb-8">
+    <div className="mb-8">
+      {/* Большие кнопки выбора команды */}
+      <div className="text-center mb-2">
+        <h2 className="text-xl font-bold text-white mb-2">Выберите команду:</h2>
+      </div>
+      <div className="flex justify-center gap-6 mb-10">
         <button
           onClick={() => setActiveTeam('gudauta')}
           className={cn(
-            "px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300",
+            "relative px-10 py-5 rounded-xl text-xl font-bold transition-all duration-300 border-4",
             activeTeam === 'gudauta'
-              ? "bg-fc-green text-white shadow-lg"
-              : "bg-white/10 text-white hover:bg-white/20"
+              ? "bg-fc-green text-white border-white shadow-[0_0_15px_rgba(255,255,255,0.5)]"
+              : "bg-white/10 text-white hover:bg-white/20 border-transparent"
           )}
         >
-          ФК Гудаута
+          <span className="flex items-center">
+            <Flag className="w-6 h-6 mr-3" />
+            ФК Гудаута
+          </span>
+          {activeTeam === 'gudauta' && (
+            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 text-white text-xs bg-fc-green px-3 py-1 rounded-full">
+              Выбрано
+            </span>
+          )}
         </button>
         <button
           onClick={() => setActiveTeam('sport-school')}
           className={cn(
-            "px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300",
+            "relative px-10 py-5 rounded-xl text-xl font-bold transition-all duration-300 border-4",
             activeTeam === 'sport-school'
-              ? "bg-fc-blue text-white shadow-lg"
-              : "bg-white/10 text-white hover:bg-white/20"
+              ? "bg-fc-blue text-white border-white shadow-[0_0_15px_rgba(255,255,255,0.5)]"
+              : "bg-white/10 text-white hover:bg-white/20 border-transparent"
           )}
         >
-          СШ Гудаута
+          <span className="flex items-center">
+            <Users className="w-6 h-6 mr-3" />
+            СШ Гудаута
+          </span>
+          {activeTeam === 'sport-school' && (
+            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 text-white text-xs bg-fc-blue px-3 py-1 rounded-full">
+              Выбрано
+            </span>
+          )}
         </button>
       </div>
 
       {/* Кнопки выбора между игроками и персоналом */}
-      <div className="flex justify-center gap-4 mb-8">
+      <div className="text-center mb-2">
+        <h3 className="text-lg font-semibold text-white mb-2">Категория:</h3>
+      </div>
+      <div className="flex justify-center gap-4 mb-6">
         <button
           onClick={() => setActiveTab('players')}
           className={cn(
-            "px-6 py-2 rounded-full transition-all duration-300",
+            "min-w-[140px] px-6 py-3 rounded-lg transition-all duration-300",
             activeTab === 'players'
-              ? "bg-white text-fc-green"
-              : "text-white hover:bg-white/10"
+              ? "bg-white text-fc-green font-bold shadow-md"
+              : "text-white bg-black/30 hover:bg-white/10"
           )}
         >
           Игроки
@@ -77,16 +99,16 @@ const TeamButtons = ({ activeTeam, activeTab, setActiveTeam, setActiveTab }) => 
         <button
           onClick={() => setActiveTab('staff')}
           className={cn(
-            "px-6 py-2 rounded-full transition-all duration-300",
+            "min-w-[140px] px-6 py-3 rounded-lg transition-all duration-300",
             activeTab === 'staff'
-              ? "bg-white text-fc-green"
-              : "text-white hover:bg-white/10"
+              ? "bg-white text-fc-green font-bold shadow-md"
+              : "text-white bg-black/30 hover:bg-white/10"
           )}
         >
           Тренерский штаб
         </button>
       </div>
-    </>
+    </div>
   );
 };
 
