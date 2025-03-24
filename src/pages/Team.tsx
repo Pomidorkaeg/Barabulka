@@ -34,71 +34,59 @@ interface StaffMember {
 
 const TeamButtons = ({ activeTeam, activeTab, setActiveTeam, setActiveTab }) => {
   return (
-    <div className="flex flex-wrap justify-center gap-4 mb-8 staggered-fade-in">
-      <button
-        onClick={() => {
-          setActiveTeam('gudauta');
-          setActiveTab('players');
-        }}
-        className={cn(
-          "button-fancy",
-          activeTeam === 'gudauta' && activeTab === 'players'
-            ? "bg-fc-green text-white button-glow"
-            : "bg-white/10 text-white hover:bg-white/20"
-        )}
-      >
-        <Flag className="w-4 h-4 mr-2 inline-block" />
-        ФК Гудаут
-      </button>
-      
-      <button
-        onClick={() => {
-          setActiveTeam('sport-school');
-          setActiveTab('players');
-        }}
-        className={cn(
-          "button-fancy",
-          activeTeam === 'sport-school' && activeTab === 'players'
-            ? "bg-fc-blue text-white button-glow"
-            : "bg-white/10 text-white hover:bg-white/20"
-        )}
-      >
-        <Users className="w-4 h-4 mr-2 inline-block" />
-        СШ Гудаут
-      </button>
+    <>
+      {/* Основные кнопки выбора команды */}
+      <div className="flex justify-center gap-4 mb-8">
+        <button
+          onClick={() => setActiveTeam('gudauta')}
+          className={cn(
+            "px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300",
+            activeTeam === 'gudauta'
+              ? "bg-fc-green text-white shadow-lg"
+              : "bg-white/10 text-white hover:bg-white/20"
+          )}
+        >
+          ФК Гудаута
+        </button>
+        <button
+          onClick={() => setActiveTeam('sport-school')}
+          className={cn(
+            "px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300",
+            activeTeam === 'sport-school'
+              ? "bg-fc-blue text-white shadow-lg"
+              : "bg-white/10 text-white hover:bg-white/20"
+          )}
+        >
+          СШ Гудаута
+        </button>
+      </div>
 
-      <button
-        onClick={() => {
-          setActiveTab('staff');
-          setActiveTeam('gudauta');
-        }}
-        className={cn(
-          "button-fancy",
-          activeTab === 'staff' && activeTeam === 'gudauta'
-            ? "bg-fc-gold text-gray-900 button-glow"
-            : "bg-white/10 text-white hover:bg-white/20"
-        )}
-      >
-        <Trophy className="w-4 h-4 mr-2 inline-block" />
-        Тренерский штаб ФК Гудаут
-      </button>
-      
-      <button
-        onClick={() => {
-          setActiveTab('staff');
-          setActiveTeam('sport-school');
-        }}
-        className={cn(
-          "button-fancy",
-          activeTab === 'staff' && activeTeam === 'sport-school'
-            ? "bg-fc-gold text-gray-900 button-glow"
-            : "bg-white/10 text-white hover:bg-white/20"
-        )}
-      >
-        <Trophy className="w-4 h-4 mr-2 inline-block" />
-        Тренерский штаб СШ Гудаут
-      </button>
-    </div>
+      {/* Кнопки выбора между игроками и персоналом */}
+      <div className="flex justify-center gap-4 mb-8">
+        <button
+          onClick={() => setActiveTab('players')}
+          className={cn(
+            "px-6 py-2 rounded-full transition-all duration-300",
+            activeTab === 'players'
+              ? "bg-white text-fc-green"
+              : "text-white hover:bg-white/10"
+          )}
+        >
+          Игроки
+        </button>
+        <button
+          onClick={() => setActiveTab('staff')}
+          className={cn(
+            "px-6 py-2 rounded-full transition-all duration-300",
+            activeTab === 'staff'
+              ? "bg-white text-fc-green"
+              : "text-white hover:bg-white/10"
+          )}
+        >
+          Тренерский штаб
+        </button>
+      </div>
+    </>
   );
 };
 
@@ -392,57 +380,12 @@ const Team = () => {
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-center mb-8 text-gradient">Наша команда</h1>
         
-        {/* Основные кнопки выбора команды */}
-        <div className="flex justify-center gap-4 mb-8">
-          <button
-            onClick={() => setActiveTeam('gudauta')}
-            className={cn(
-              "px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300",
-              activeTeam === 'gudauta'
-                ? "bg-fc-green text-white shadow-lg"
-                : "bg-white/10 text-white hover:bg-white/20"
-            )}
-          >
-            ФК Гудаута
-          </button>
-          <button
-            onClick={() => setActiveTeam('sport-school')}
-            className={cn(
-              "px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300",
-              activeTeam === 'sport-school'
-                ? "bg-fc-blue text-white shadow-lg"
-                : "bg-white/10 text-white hover:bg-white/20"
-            )}
-          >
-            СШ Гудаута
-          </button>
-        </div>
-
-        {/* Кнопки выбора между игроками и персоналом */}
-        <div className="flex justify-center gap-4 mb-8">
-          <button
-            onClick={() => setActiveTab('players')}
-            className={cn(
-              "px-6 py-2 rounded-full transition-all duration-300",
-              activeTab === 'players'
-                ? "bg-white text-fc-green"
-                : "text-white hover:bg-white/10"
-            )}
-          >
-            Игроки
-          </button>
-          <button
-            onClick={() => setActiveTab('staff')}
-            className={cn(
-              "px-6 py-2 rounded-full transition-all duration-300",
-              activeTab === 'staff'
-                ? "bg-white text-fc-green"
-                : "text-white hover:bg-white/10"
-            )}
-          >
-            Тренерский штаб
-          </button>
-        </div>
+        <TeamButtons 
+          activeTeam={activeTeam}
+          activeTab={activeTab}
+          setActiveTeam={setActiveTeam}
+          setActiveTab={setActiveTab}
+        />
 
         {/* Фильтры по позициям для игроков */}
         {activeTab === 'players' && (
