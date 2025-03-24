@@ -1,108 +1,135 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { cn } from '@/lib/utils';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  
+
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setScrolled(window.scrollY > 10);
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  
-  const isActive = (path: string) => location.pathname === path;
-  
-  const navLinks = [
-    { name: 'Главная', path: '/' },
-    { name: 'Команда', path: '/team' },
-    { name: 'Новости', path: '/news' },
-    { name: 'Матчи', path: '/matches' },
-    { name: 'Соревнования', path: '/tournaments' },
-    { name: 'Медиа', path: '/media' },
-    { name: 'Контакты', path: '/contacts' },
-  ];
-  
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
   return (
-    <header className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-transparent"
-    )}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
-          <div className="flex items-center">
-            <Link 
-              to="/" 
-              className="flex items-center space-x-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <span className="text-fc-green font-bold text-xl">ФК ГУДАУТ</span>
-            </Link>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      scrolled ? 'glass-effect py-2 shadow-lg' : 'bg-transparent py-4'
+    }`}>
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center">
+          <NavLink to="/" className="text-white font-bold text-2xl flex items-center gap-2 animate-float">
+            <img 
+              src="/placeholder.svg" 
+              alt="ФК Гудаут" 
+              className="w-10 h-10" 
+            />
+            <span className={`text-gradient-brand font-bold text-shadow`}>ФК Гудаут</span>
+          </NavLink>
+
+          {/* Десктопное меню */}
+          <div className="hidden md:flex items-center space-x-1">
+            <NavLinks />
           </div>
-          
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={cn(
-                  "nav-link",
-                  isActive(link.path) ? "active-nav-link text-fc-green" : "text-gray-700 hover:text-fc-green"
-                )}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-          
-          {/* Mobile menu button */}
+
+          {/* Мобильная кнопка */}
           <button
-            onClick={toggleMenu}
-            className="md:hidden rounded-md p-2 inline-flex items-center justify-center text-gray-800 hover:text-fc-green focus:outline-none"
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-white p-2 focus:outline-none transition-transform duration-300 hover:scale-110"
           >
-            <span className="sr-only">Open main menu</span>
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
-      
-      {/* Mobile Navigation */}
-      <div className={cn(
-        "md:hidden fixed inset-x-0 top-[4rem] bg-white/95 backdrop-blur-md transition-all duration-300 ease-in-out transform origin-top",
-        isMenuOpen ? "opacity-100 scale-y-100 shadow-lg" : "opacity-0 scale-y-0 pointer-events-none"
-      )}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={cn(
-                "block px-3 py-2 rounded-md text-base font-medium transition-colors duration-150",
-                isActive(link.path) 
-                  ? "text-fc-green bg-fc-green/10" 
-                  : "text-gray-700 hover:text-fc-green hover:bg-fc-green/5"
-              )}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {link.name}
-            </Link>
-          ))}
+
+      {/* Мобильное меню */}
+      <div className={`md:hidden ${isOpen ? 'block animate-fadeIn' : 'hidden'}`}>
+        <div className="glass-effect px-4 pt-2 pb-4 shadow-lg staggered-fade-in">
+          <div className="flex flex-col space-y-2">
+            <MobileNavLinks />
+          </div>
         </div>
       </div>
-    </header>
+    </nav>
+  );
+};
+
+const NavLinks = () => {
+  const location = useLocation();
+  
+  const links = [
+    { to: '/', label: 'Главная' },
+    { to: '/news', label: 'Новости' },
+    { to: '/matches', label: 'Матчи' },
+    { to: '/team', label: 'Команда' },
+    { to: '/tournaments', label: 'Турниры' },
+    { to: '/media', label: 'Медиа' },
+    { to: '/contacts', label: 'Контакты' },
+  ];
+
+  return (
+    <>
+      {links.map((link, index) => (
+        <NavLink
+          key={link.to}
+          to={link.to}
+          className={({ isActive }) => `
+            relative px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300
+            ${isActive 
+              ? 'text-white button-glow bg-fc-green' 
+              : 'text-white/80 hover:text-white hover:bg-white/10'
+            }
+          `}
+          style={{ animationDelay: `${index * 0.1}s` }}
+        >
+          {link.label}
+          {location.pathname === link.to && (
+            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-fc-gold animate-pulse" />
+          )}
+        </NavLink>
+      ))}
+    </>
+  );
+};
+
+const MobileNavLinks = () => {
+  const links = [
+    { to: '/', label: 'Главная' },
+    { to: '/news', label: 'Новости' },
+    { to: '/matches', label: 'Матчи' },
+    { to: '/team', label: 'Команда' },
+    { to: '/tournaments', label: 'Турниры' },
+    { to: '/media', label: 'Медиа' },
+    { to: '/contacts', label: 'Контакты' },
+  ];
+
+  return (
+    <>
+      {links.map((link, index) => (
+        <NavLink
+          key={link.to}
+          to={link.to}
+          className={({ isActive }) => `
+            block px-4 py-3 rounded-lg font-medium transition-all duration-300
+            ${isActive 
+              ? 'bg-fc-green text-white' 
+              : 'text-white/80 hover:text-white hover:bg-white/10'
+            }
+          `}
+          style={{ animationDelay: `${index * 0.1}s` }}
+        >
+          {link.label}
+        </NavLink>
+      ))}
+    </>
   );
 };
 
