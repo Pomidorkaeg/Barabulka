@@ -400,14 +400,80 @@ const Team = () => {
     <div className="min-h-screen bg-gradient-brand">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-center mb-8 text-gradient">Наша команда</h1>
+        <h1 className="text-4xl font-bold text-center mb-12 text-gradient">Наша команда</h1>
         
-        <TeamButtons 
-          activeTeam={activeTeam}
-          activeTab={activeTab}
-          setActiveTeam={setActiveTeam}
-          setActiveTab={setActiveTab}
-        />
+        {/* Большие карточки команд */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          {/* ФК Гудаута */}
+          <div 
+            onClick={() => setActiveTeam('gudauta')}
+            className={cn(
+              "relative p-8 rounded-2xl cursor-pointer transition-all duration-300 transform hover:scale-105",
+              activeTeam === 'gudauta' 
+                ? "bg-fc-green/20 border-4 border-white shadow-[0_0_30px_rgba(255,255,255,0.3)]" 
+                : "bg-white/5 border-4 border-transparent hover:bg-white/10"
+            )}
+          >
+            <div className="flex items-center gap-4 mb-4">
+              <Flag className="w-12 h-12 text-white" />
+              <h2 className="text-3xl font-bold text-white">ФК Гудаута</h2>
+            </div>
+            <p className="text-white/80 mb-4">Основная команда футбольного клуба</p>
+            {activeTeam === 'gudauta' && (
+              <div className="absolute top-4 right-4 bg-white text-fc-green px-4 py-2 rounded-full text-sm font-bold">
+                Выбрано
+              </div>
+            )}
+          </div>
+
+          {/* СШ Гудаута */}
+          <div 
+            onClick={() => setActiveTeam('sport-school')}
+            className={cn(
+              "relative p-8 rounded-2xl cursor-pointer transition-all duration-300 transform hover:scale-105",
+              activeTeam === 'sport-school' 
+                ? "bg-fc-blue/20 border-4 border-white shadow-[0_0_30px_rgba(255,255,255,0.3)]" 
+                : "bg-white/5 border-4 border-transparent hover:bg-white/10"
+            )}
+          >
+            <div className="flex items-center gap-4 mb-4">
+              <Users className="w-12 h-12 text-white" />
+              <h2 className="text-3xl font-bold text-white">СШ Гудаута</h2>
+            </div>
+            <p className="text-white/80 mb-4">Спортивная школа футбольного клуба</p>
+            {activeTeam === 'sport-school' && (
+              <div className="absolute top-4 right-4 bg-white text-fc-blue px-4 py-2 rounded-full text-sm font-bold">
+                Выбрано
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Кнопки выбора между игроками и персоналом */}
+        <div className="flex justify-center gap-6 mb-10">
+          <button
+            onClick={() => setActiveTab('players')}
+            className={cn(
+              "min-w-[180px] px-8 py-4 rounded-xl text-lg font-bold transition-all duration-300",
+              activeTab === 'players'
+                ? "bg-white text-fc-green shadow-lg"
+                : "bg-black/30 text-white hover:bg-white/10"
+            )}
+          >
+            Игроки
+          </button>
+          <button
+            onClick={() => setActiveTab('staff')}
+            className={cn(
+              "min-w-[180px] px-8 py-4 rounded-xl text-lg font-bold transition-all duration-300",
+              activeTab === 'staff'
+                ? "bg-white text-fc-green shadow-lg"
+                : "bg-black/30 text-white hover:bg-white/10"
+            )}
+          >
+            Тренерский штаб
+          </button>
+        </div>
 
         {/* Фильтры по позициям для игроков */}
         {activeTab === 'players' && (
