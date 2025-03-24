@@ -32,6 +32,76 @@ interface StaffMember {
   team: string;
 }
 
+const TeamButtons = ({ activeTeam, activeTab, setActiveTeam, setActiveTab }) => {
+  return (
+    <div className="flex flex-wrap justify-center gap-4 mb-8 staggered-fade-in">
+      <button
+        onClick={() => {
+          setActiveTeam('gudauta');
+          setActiveTab('players');
+        }}
+        className={cn(
+          "button-fancy",
+          activeTeam === 'gudauta' && activeTab === 'players'
+            ? "bg-fc-green text-white button-glow"
+            : "bg-white/10 text-white hover:bg-white/20"
+        )}
+      >
+        <Flag className="w-4 h-4 mr-2 inline-block" />
+        ФК Гудаут
+      </button>
+      
+      <button
+        onClick={() => {
+          setActiveTeam('sport-school');
+          setActiveTab('players');
+        }}
+        className={cn(
+          "button-fancy",
+          activeTeam === 'sport-school' && activeTab === 'players'
+            ? "bg-fc-blue text-white button-glow"
+            : "bg-white/10 text-white hover:bg-white/20"
+        )}
+      >
+        <Users className="w-4 h-4 mr-2 inline-block" />
+        СШ Гудаут
+      </button>
+
+      <button
+        onClick={() => {
+          setActiveTab('staff');
+          setActiveTeam('gudauta');
+        }}
+        className={cn(
+          "button-fancy",
+          activeTab === 'staff' && activeTeam === 'gudauta'
+            ? "bg-fc-gold text-gray-900 button-glow"
+            : "bg-white/10 text-white hover:bg-white/20"
+        )}
+      >
+        <Trophy className="w-4 h-4 mr-2 inline-block" />
+        Тренерский штаб ФК Гудаут
+      </button>
+      
+      <button
+        onClick={() => {
+          setActiveTab('staff');
+          setActiveTeam('sport-school');
+        }}
+        className={cn(
+          "button-fancy",
+          activeTab === 'staff' && activeTeam === 'sport-school'
+            ? "bg-fc-gold text-gray-900 button-glow"
+            : "bg-white/10 text-white hover:bg-white/20"
+        )}
+      >
+        <Trophy className="w-4 h-4 mr-2 inline-block" />
+        Тренерский штаб СШ Гудаут
+      </button>
+    </div>
+  );
+};
+
 const Team = () => {
   const [activeTab, setActiveTab] = useState<'players' | 'staff'>('players');
   const [activePosition, setActivePosition] = useState('all');
@@ -322,74 +392,12 @@ const Team = () => {
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-center mb-8 text-gradient">Наша команда</h1>
         
-        {/* Все кнопки в одном контейнере */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8 staggered-fade-in">
-          {/* Кнопки для игроков */}
-          <button
-            onClick={() => {
-              setActiveTeam('gudauta');
-              setActiveTab('players');
-            }}
-            className={cn(
-              "button-fancy",
-              activeTeam === 'gudauta' && activeTab === 'players'
-                ? "bg-fc-green text-white button-glow"
-                : "bg-white/10 text-white hover:bg-white/20"
-            )}
-          >
-            <Flag className="w-4 h-4 mr-2 inline-block" />
-            ФК Гудаут
-          </button>
-          
-          <button
-            onClick={() => {
-              setActiveTeam('sport-school');
-              setActiveTab('players');
-            }}
-            className={cn(
-              "button-fancy",
-              activeTeam === 'sport-school' && activeTab === 'players'
-                ? "bg-fc-blue text-white button-glow"
-                : "bg-white/10 text-white hover:bg-white/20"
-            )}
-          >
-            <Users className="w-4 h-4 mr-2 inline-block" />
-            СШ Гудаут
-          </button>
-
-          {/* Кнопки для тренерского штаба */}
-          <button
-            onClick={() => {
-              setActiveTab('staff');
-              setActiveTeam('gudauta');
-            }}
-            className={cn(
-              "button-fancy",
-              activeTab === 'staff' && activeTeam === 'gudauta'
-                ? "bg-fc-gold text-gray-900 button-glow"
-                : "bg-white/10 text-white hover:bg-white/20"
-            )}
-          >
-            <Trophy className="w-4 h-4 mr-2 inline-block" />
-            Тренерский штаб ФК Гудаут
-          </button>
-          
-          <button
-            onClick={() => {
-              setActiveTab('staff');
-              setActiveTeam('sport-school');
-            }}
-            className={cn(
-              "button-fancy",
-              activeTab === 'staff' && activeTeam === 'sport-school'
-                ? "bg-fc-gold text-gray-900 button-glow"
-                : "bg-white/10 text-white hover:bg-white/20"
-            )}
-          >
-            <Trophy className="w-4 h-4 mr-2 inline-block" />
-            Тренерский штаб СШ Гудаут
-          </button>
-        </div>
+        <TeamButtons 
+          activeTeam={activeTeam}
+          activeTab={activeTab}
+          setActiveTeam={setActiveTeam}
+          setActiveTab={setActiveTab}
+        />
 
         {/* Фильтры по позициям для игроков */}
         {activeTab === 'players' && (
