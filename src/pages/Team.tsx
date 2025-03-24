@@ -364,7 +364,10 @@ const Team = () => {
           </button>
           
           <button
-            onClick={() => setActiveTab('staff')}
+            onClick={() => {
+              setActiveTab('staff');
+              setActiveTeam('gudauta');
+            }}
             className={cn(
               "button-fancy",
               activeTab === 'staff'
