@@ -392,12 +392,57 @@ const Team = () => {
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-center mb-8 text-gradient">Наша команда</h1>
         
-        <TeamButtons 
-          activeTeam={activeTeam}
-          activeTab={activeTab}
-          setActiveTeam={setActiveTeam}
-          setActiveTab={setActiveTab}
-        />
+        {/* Основные кнопки выбора команды */}
+        <div className="flex justify-center gap-4 mb-8">
+          <button
+            onClick={() => setActiveTeam('gudauta')}
+            className={cn(
+              "px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300",
+              activeTeam === 'gudauta'
+                ? "bg-fc-green text-white shadow-lg"
+                : "bg-white/10 text-white hover:bg-white/20"
+            )}
+          >
+            ФК Гудаута
+          </button>
+          <button
+            onClick={() => setActiveTeam('sport-school')}
+            className={cn(
+              "px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300",
+              activeTeam === 'sport-school'
+                ? "bg-fc-blue text-white shadow-lg"
+                : "bg-white/10 text-white hover:bg-white/20"
+            )}
+          >
+            СШ Гудаута
+          </button>
+        </div>
+
+        {/* Кнопки выбора между игроками и персоналом */}
+        <div className="flex justify-center gap-4 mb-8">
+          <button
+            onClick={() => setActiveTab('players')}
+            className={cn(
+              "px-6 py-2 rounded-full transition-all duration-300",
+              activeTab === 'players'
+                ? "bg-white text-fc-green"
+                : "text-white hover:bg-white/10"
+            )}
+          >
+            Игроки
+          </button>
+          <button
+            onClick={() => setActiveTab('staff')}
+            className={cn(
+              "px-6 py-2 rounded-full transition-all duration-300",
+              activeTab === 'staff'
+                ? "bg-white text-fc-green"
+                : "text-white hover:bg-white/10"
+            )}
+          >
+            Тренерский штаб
+          </button>
+        </div>
 
         {/* Фильтры по позициям для игроков */}
         {activeTab === 'players' && (
