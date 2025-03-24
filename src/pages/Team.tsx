@@ -311,12 +311,15 @@ const Team = () => {
           Наша Команда
         </h1>
 
-        {/* Кнопки выбора команды */}
+        {/* Основное меню выбора */}
         <div className="flex justify-center gap-4 mb-8 animate-fade-in">
           <button
-            onClick={() => setActiveTeam('gudauta')}
+            onClick={() => {
+              setActiveTeam('gudauta');
+              setActiveTab('players');
+            }}
             className={`px-6 py-2 rounded-full transition-all duration-300 ${
-              activeTeam === 'gudauta'
+              activeTeam === 'gudauta' && activeTab === 'players'
                 ? 'bg-blue-500 text-white shadow-glow'
                 : 'bg-white/10 text-white hover:bg-white/20'
             }`}
@@ -324,15 +327,21 @@ const Team = () => {
             ФК Гудаут
           </button>
           <button
-            onClick={() => setActiveTeam('sport-school')}
+            onClick={() => {
+              setActiveTeam('sport-school');
+              setActiveTab('players');
+            }}
             className={`px-6 py-2 rounded-full transition-all duration-300 ${
-              activeTeam === 'sport-school'
+              activeTeam === 'sport-school' && activeTab === 'players'
                 ? 'bg-green-500 text-white shadow-glow'
                 : 'bg-white/10 text-white hover:bg-white/20'
             }`}
           >
             СШ Гудаут
           </button>
+          <button
+            onClick={() => setActiveTab('staff')}
+            className={`px-6 py-2 rounded-full transition-all duration-300 ${
         </div>
 
         {/* Кнопки переключения между игроками и тренерским штабом */}
