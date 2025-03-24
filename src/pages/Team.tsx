@@ -250,59 +250,54 @@ const Team = () => {
   const staff: StaffMember[] = [
     {
       id: '1',
-      name: 'Сергей Павлович Иванов',
+      name: 'Алексей Николаевич Соколов',
       role: 'Главный тренер',
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
-      since: '2021',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+      since: '2020',
       team: 'gudauta'
     },
     {
       id: '2',
-      name: 'Алексей Николаевич Петров',
-      role: 'Ассистент тренера',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      since: '2022',
+      name: 'Дмитрий Александрович Петров',
+      role: 'Тренер вратарей',
+      image: 'https://images.unsplash.com/photo-1539614474467-f8a89c5aa8f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      since: '2021',
       team: 'gudauta'
     },
     {
       id: '3',
-      name: 'Дмитрий Александрович Сидоров',
-      role: 'Тренер вратарей',
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+      name: 'Игорь Владимирович Смирнов',
+      role: 'Тренер по физической подготовке',
+      image: 'https://images.unsplash.com/photo-1534126416832-a88fdf2911c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
       since: '2022',
       team: 'gudauta'
     },
     {
       id: '4',
-      name: 'Игорь Владимирович Кузнецов',
-      role: 'Физиотерапевт',
-      image: 'https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80',
-      since: '2023',
-      team: 'gudauta'
-    },
-    {
-      id: '5',
       name: 'Алексей Николаевич Соколов',
-      role: 'Тренер СШ',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      role: 'Тренер спортивной школы',
+      image: 'https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
       since: '2020',
       team: 'sport-school'
     },
     {
-      id: '6',
+      id: '5',
       name: 'Дмитрий Александрович Петров',
-      role: 'Тренер вратарей СШ',
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+      role: 'Тренер вратарей спортивной школы',
+      image: 'https://images.unsplash.com/photo-1584634731339-252e5223ee7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1976&q=80',
       since: '2021',
       team: 'sport-school'
-    },
+    }
   ];
   
+  // Фильтрация игроков по позиции и команде
   const filteredPlayers = players.filter(player => {
-    if (activePosition === 'all') return player.team === activeTeam;
-    return player.position === activePosition && player.team === activeTeam;
+    const positionMatch = activePosition === 'all' || player.position === activePosition;
+    const teamMatch = player.team === activeTeam;
+    return positionMatch && teamMatch;
   });
   
+  // Фильтрация тренерского штаба по команде
   const filteredStaff = staff.filter(member => member.team === activeTeam);
   
   const handlePlayerClick = (player: Player) => {
@@ -316,6 +311,7 @@ const Team = () => {
           Наша Команда
         </h1>
 
+        {/* Кнопки выбора команды */}
         <div className="flex justify-center gap-4 mb-8 animate-fade-in">
           <button
             onClick={() => setActiveTeam('gudauta')}
@@ -339,6 +335,7 @@ const Team = () => {
           </button>
         </div>
 
+        {/* Кнопки переключения между игроками и тренерским штабом */}
         <div className="flex justify-center gap-4 mb-8 animate-fade-in">
           <button
             onClick={() => setActiveTab('players')}
@@ -364,13 +361,14 @@ const Team = () => {
 
         {activeTab === 'players' && (
           <>
+            {/* Фильтры по позициям */}
             <div className="flex flex-wrap gap-4 mb-8 animate-fade-in">
               {['Все', 'Вратари', 'Защитники', 'Полузащитники', 'Нападающие'].map((pos) => (
                 <button
                   key={pos}
-                  onClick={() => setActivePosition(pos)}
+                  onClick={() => setActivePosition(pos === 'Все' ? 'all' : pos)}
                   className={`px-4 py-2 rounded-full transition-all duration-300 ${
-                    activePosition === pos
+                    activePosition === (pos === 'Все' ? 'all' : pos)
                       ? 'bg-blue-500 text-white shadow-glow'
                       : 'bg-white/10 text-white hover:bg-white/20'
                   }`}
@@ -380,6 +378,7 @@ const Team = () => {
               ))}
             </div>
 
+            {/* Сетка игроков */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredPlayers.map((player) => (
                 <div
