@@ -319,16 +319,9 @@ const Team = () => {
   return (
     <div className="min-h-screen bg-gradient-brand">
       <Navbar />
-      <div className="container mx-auto pt-24 pb-16 px-4">
-        <div className="text-center mb-10 staggered-fade-in">
-          <h1 className="text-4xl md:text-5xl font-bold text-white text-shadow mb-4 animate-float">
-            Команда ФК Гудаут
-          </h1>
-          <p className="text-lg text-white/80 max-w-2xl mx-auto">
-            Познакомьтесь с игроками и тренерским составом нашего клуба
-          </p>
-        </div>
-
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold text-center mb-8 text-gradient">Наша команда</h1>
+        
         {/* Основные кнопки выбора команды */}
         <div className="flex flex-wrap justify-center gap-4 mb-8 staggered-fade-in">
           <button
