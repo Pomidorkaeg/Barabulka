@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Перенаправление...</title>
+  </head>
+  <body>
+    <script>
+      // Получаем текущий путь
+      const path = window.location.pathname;
+      // Удаляем префикс репозитория, если он есть
+      const cleanPath = path.replace(/^\/tournament-tables-hub1/, '');
+      // Перенаправляем на index.html с сохранением пути
+      window.location.href = '/tournament-tables-hub1/index.html' + cleanPath;
+    </script>
+  </body>
+</html> 

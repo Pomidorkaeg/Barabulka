@@ -1,0 +1,23 @@
+[33mcommit 5c083b44558eaaefc6c215d8f98d670ce4f4fc1b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mgh-pages[m[33m, [m[1;31morigin/gh-pages[m[33m)[m
+Author: Егор <egornazarko2009.09@gmail.com>
+Date:   Fri Mar 21 12:03:52 2025 +0300
+
+    Оптимизация загрузки сайта: убраны все экраны загрузки и задержки
+[1mdiff --git a/src/App.tsx b/src/App.tsx[m
+[1mindex 5a99123f..252e3b12 100644[m
+[1m--- a/src/App.tsx[m
+[1m+++ b/src/App.tsx[m
+[36m@@ -14,7 +14,7 @@[m [mfunction App() {[m
+     <Router>[m
+       <div className="min-h-screen bg-gray-50">[m
+         <Navbar />[m
+[31m-        <main className="pt-16">[m
+[32m+[m[32m        <main className="pt-16 min-h-screen">[m
+           <Routes>[m
+             <Route path="/" element={<HomePage />} />[m
+             <Route path="/login" element={<LoginPage />} />[m
+[33mcommit 8b4f5c4e36f9ba148d03c449fb9e23c59be2b83d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mgh-pages[m[33m, [m[1;31morigin/gh-pages[m[33m)[m
+Author: Егор <egornazarko2009.09@gmail.com>
+Date:   Fri Mar 21 15:55:24 2025 +0300
+
+    Улучшена синхронизация данных между админ-панелью и основным сайтом
