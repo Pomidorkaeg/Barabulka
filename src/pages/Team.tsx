@@ -322,8 +322,9 @@ const Team = () => {
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-center mb-8 text-gradient">Наша команда</h1>
         
-        {/* Основные кнопки выбора команды */}
+        {/* Все кнопки в одном контейнере */}
         <div className="flex flex-wrap justify-center gap-4 mb-8 staggered-fade-in">
+          {/* Кнопки для игроков */}
           <button
             onClick={() => {
               setActiveTeam('gudauta');
@@ -355,10 +356,8 @@ const Team = () => {
             <Users className="w-4 h-4 mr-2 inline-block" />
             СШ Гудаут
           </button>
-        </div>
 
-        {/* Кнопки для тренерского штаба */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8 staggered-fade-in">
+          {/* Кнопки для тренерского штаба */}
           <button
             onClick={() => {
               setActiveTab('staff');
